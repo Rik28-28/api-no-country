@@ -1,5 +1,5 @@
 import jwt from "jsonwebtoken";
-import { KEYSECRETTOKEN } from "../config";
+import { KEYSECRETTOKEN } from "../config.js";
 
 export const authAdmin = (req, res) => {
   

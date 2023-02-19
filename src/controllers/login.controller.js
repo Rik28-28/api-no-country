@@ -8,6 +8,9 @@ export const loginController = async (req, res) => {
 
     const user = req.body.user
     const password = req.body.password
+
+    if (!user) return res.json({ error: true, msg: "Nombre de usuario no ingresado" })
+    if (!user) return res.json({ error: true, msg: "Contraseña no ingresada" })
     
     let userFound = await User.findOne({ "user": user })
     if (!userFound) return res.json({ error: true, msg: "El usuario no existe" })
@@ -16,7 +19,7 @@ export const loginController = async (req, res) => {
     if (!result) return res.json({ error: true, msg: "Contraseña incorrecta" })
 
 
-    var token = jwt.sign({ id: userFound.id }, KEYSECRETTOKEN, { expiresIn: "5m" })
+    var token = jwt.sign({ user: userFound.user }, KEYSECRETTOKEN, { expiresIn: 300 })
 
     return res.json(
         {
@@ -30,7 +33,7 @@ export const loginController = async (req, res) => {
 
     } catch (error) {
 
-        res.json({ error: true, msg: error })
+        res.json({ error: true, msg: "Error de servidor" })
 
     }
 }

@@ -1,13 +1,12 @@
 import Product from "../models/product.model.js"
 
-export const getProductController = async (req, res) => {
+const filterCategoryController = async () => {
     try {
-        const products = await Product.find()
+        const productFilter = await Product.find({ [req.body.category]: req.body.value })
         return res.json(
             {
                 error: false,
-                msg: products
-
+                msg: productFilter
             }
         )
     } catch (error) {
@@ -15,3 +14,4 @@ export const getProductController = async (req, res) => {
     }
 }
 
+export default filterCategoryController

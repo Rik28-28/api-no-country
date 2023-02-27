@@ -2,7 +2,7 @@ import Product from "../models/product.model.js"
 
 const filterCategoryController = async () => {
     try {
-        const productFilter = await Product.find({ [req.body.category]: req.body.value })
+        const productFilter = await Product.find({ [req.body.type]: req.body.value })
         return res.json(
             {
                 error: false,
